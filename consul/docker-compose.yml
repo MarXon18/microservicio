@@ -1,0 +1,17 @@
+services:    
+    consul:
+        image: hashicorp/consul:1.19
+        networks:
+            - mired
+        ports:
+            - "8500:8500"
+            - "8300:8300"
+            - "8600:8600/udp"
+        volumes:
+            - ./config/consul.json:/consul/config/config.json
+            - ./data:/consul/data:rw
+            - ./ca:/consul/ca
+        command: agent -bind 0.0.0.0 -disable-host-node-id=true
+networks:
+    mired:
+      external: true

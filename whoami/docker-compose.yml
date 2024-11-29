@@ -1,0 +1,15 @@
+services:
+  whoami:
+    image: containous/whoami
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.universidad.localhost`)"
+      - "traefik.http.routers.whoami.tls=true"
+    networks:
+      - mired
+
+networks:
+  mired:
+    external: true
