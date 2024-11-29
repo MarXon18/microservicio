@@ -1,0 +1,8 @@
+Flask==3.0.3
+flask-marshmallow==1.2.1
+marshmallow==3.23
+requests==2.32.3
+saga_py==1.1.0
+Flask-Caching==2.3.0
+redis==5.1.1
+python-dotenv==1.0.1
