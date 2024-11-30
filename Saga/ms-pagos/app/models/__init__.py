@@ -1,1 +1,0 @@
-from .pago import Pago

@@ -1,1 +1,0 @@
-from .compra_schema import CompraSchema

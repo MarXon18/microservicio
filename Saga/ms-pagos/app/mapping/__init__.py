@@ -1,1 +1,0 @@
-from .pago_schema import PagoSchema

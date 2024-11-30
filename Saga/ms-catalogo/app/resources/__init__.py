@@ -1,1 +1,0 @@
-from .catalogo import catalogo_bp
