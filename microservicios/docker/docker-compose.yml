@@ -1,0 +1,105 @@
+version: '3'
+services:
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+
+  ecomerce:
+    build: D:\microservicios-main\microservicios\app-commerce  # Ruta al Dockerfile local
+    container_name: ecomerce
+    ports:
+      - 5000:5000
+    networks:
+      - mired
+    environment:
+      - FLASK_CONTEXT=${FLASK_CONTEXT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=${REDIS_DB}
+      - MSCATALOGO_URL=${MSCATALOGO_URL}
+      - MSPAGOS_URL=${MSPAGOS_URL}
+      - MSCOMPRAS_URL=${MSCOMPRAS_URL}
+      - MSINVENTARIOS_URL=${MSINVENTARIOS_URL}
+
+  mscatalogo:
+    build: D:\microservicios-main\microservicios\ms-catalogo  # Ruta al Dockerfile local
+    container_name: mscatalogo
+    depends_on:
+      - ecomerce
+    ports:
+      - 5001:5000
+    networks:
+      - mired
+    environment:
+      - FLASK_CONTEXT=${FLASK_CONTEXT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=${REDIS_DB}
+      - TEST_DATABASE_URI=${TEST_DATABASE_URI}
+      - DEV_DATABASE_URI=${DEV_DATABASE_URI}
+      - PROD_DATABASE_URI=${PROD_DATABASE_URI}
+
+  mspagos:
+    build: D:\microservicios-main\microservicios\ms-pagos  # Ruta al Dockerfile local
+    container_name: mspagos
+    depends_on:
+      - ecomerce
+    ports:
+      - 5002:5000
+    networks:
+      - mired
+    environment:
+      - FLASK_CONTEXT=${FLASK_CONTEXT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=${REDIS_DB}
+      - TEST_DATABASE_URI=${TEST_DATABASE_URI}
+      - DEV_DATABASE_URI=${DEV_DATABASE_URI}
+      - PROD_DATABASE_URI=${PROD_DATABASE_URI}
+
+  mscompras:
+    build: D:\microservicios-main\microservicios\ms-compras  # Ruta al Dockerfile local
+    container_name: mscompras
+    depends_on:
+      - ecomerce
+    ports:
+      - 5003:5000
+    networks:
+      - mired
+    environment:
+      - FLASK_CONTEXT=${FLASK_CONTEXT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=${REDIS_DB}
+      - TEST_DATABASE_URI=${TEST_DATABASE_URI}
+      - DEV_DATABASE_URI=${DEV_DATABASE_URI}
+      - PROD_DATABASE_URI=${PROD_DATABASE_URI}
+
+  msinventarios:
+    build: D:\microservicios-main\microservicios\ms-inventario  # Ruta al Dockerfile local
+    container_name: msinventarios
+    depends_on:
+      - ecomerce
+    ports:
+      - 5004:5000
+    networks:
+      - mired
+    environment:
+      - FLASK_CONTEXT=${FLASK_CONTEXT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=${REDIS_DB}
+      - TEST_DATABASE_URI=${TEST_DATABASE_URI}
+      - DEV_DATABASE_URI=${DEV_DATABASE_URI}
+      - PROD_DATABASE_URI=${PROD_DATABASE_URI}
+
+networks:
+  mired:
+    external: true
