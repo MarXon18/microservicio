@@ -1,9 +1,9 @@
+# app/__init__.py
 from flask import Flask, jsonify
 from flask_marshmallow import Marshmallow
 import os
 from app.config import config
 from flask_caching import Cache
-import os
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from app.config.cache_config import cache_config
@@ -13,8 +13,7 @@ migrate = Migrate()
 ma = Marshmallow()
 cache = Cache()
 
-def create_app() -> None:
-
+def create_app() -> Flask:
     app_context = os.getenv('FLASK_CONTEXT')
     app = Flask(__name__)
 
@@ -26,8 +25,8 @@ def create_app() -> None:
     migrate.init_app(app, db)
     cache.init_app(app, config=cache_config)
     
-    from app.resources import catalogo_bp
-    app.register_blueprint(catalogo_bp, url_prefix='/api/v1')
+    from app.resources.inventarios_bp import inventarios_bp
+    app.register_blueprint(inventarios_bp, url_prefix='/api/v1')
     
     @app.shell_context_processor    
     def ctx():
