@@ -2,11 +2,14 @@
 from flask import Flask, jsonify
 from flask_marshmallow import Marshmallow
 import os
+from dotenv import load_dotenv
 from app.config import config
 from flask_caching import Cache
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from app.config.cache_config import cache_config
+
+load_dotenv()
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -24,6 +27,16 @@ def create_app() -> Flask:
     db.init_app(app)
     migrate.init_app(app, db)
     cache.init_app(app, config=cache_config)
+    
+    from app.resources.pago import pago_bp
+    app.register_blueprint(pago_bp, url_prefix='/api/v1')
+    
+    @app.shell_context_processor    
+    def ctx():
+        return {"app": app}
+    
+    return app
+
     
     from app.resources.pagos_bp import pagos_bp
     app.register_blueprint(pagos_bp, url_prefix='/api/v1')
