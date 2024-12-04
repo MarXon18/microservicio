@@ -7,7 +7,7 @@ services:
       - 6379:6379
 
   ecomerce:
-    build: D:\microservicios-main\microservicios\app-commerce  # Ruta al Dockerfile local
+    build: ..\app-commerce  # Ruta al Dockerfile local
     container_name: ecomerce
     ports:
       - 5000:5000
@@ -25,7 +25,7 @@ services:
       - MSINVENTARIOS_URL=${MSINVENTARIOS_URL}
 
   mscatalogo:
-    build: D:\microservicios-main\microservicios\ms-catalogo  # Ruta al Dockerfile local
+    build: ..\ms-catalogo  # Ruta al Dockerfile local
     container_name: mscatalogo
     depends_on:
       - ecomerce
@@ -44,7 +44,7 @@ services:
       - PROD_DATABASE_URI=${PROD_DATABASE_URI}
 
   mspagos:
-    build: D:\microservicios-main\microservicios\ms-pagos  # Ruta al Dockerfile local
+    build: ..\ms-pagos  # Ruta al Dockerfile local
     container_name: mspagos
     depends_on:
       - ecomerce
@@ -63,7 +63,7 @@ services:
       - PROD_DATABASE_URI=${PROD_DATABASE_URI}
 
   mscompras:
-    build: D:\microservicios-main\microservicios\ms-compras  # Ruta al Dockerfile local
+    build: ..\ms-compras  # Ruta al Dockerfile local
     container_name: mscompras
     depends_on:
       - ecomerce
@@ -82,7 +82,7 @@ services:
       - PROD_DATABASE_URI=${PROD_DATABASE_URI}
 
   msinventarios:
-    build: D:\microservicios-main\microservicios\ms-inventario  # Ruta al Dockerfile local
+    build: ..\ms-inventario  # Ruta al Dockerfile local
     container_name: msinventarios
     depends_on:
       - ecomerce
