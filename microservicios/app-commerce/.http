@@ -1,0 +1,123 @@
+### CONEXION ms-catalogo (5000) POST | REGISTRAR PRODUCTO
+POST http://localhost:5000/api/catalogo/
+Content-Type: application/json
+
+{
+  "nombre": "celu",
+  "precio": 100.50,
+  "activo": true
+}
+
+### CONEXION ms-catalogo (5000) GET | OBTENER PRODUCTO
+GET http://localhost:5000/api/catalogo/1
+Content-Type: application/json
+
+### CONEXION ms-pagos (5000) POST | REGISTRAR PAGO
+POST http://localhost:5000/api/v1/pagos/registro
+Content-Type: application/json
+
+{
+  "monto": 100.50,
+  "metodo": "tarjeta",
+  "descripcion": "pedido123"
+}
+
+### CONEXION ms-pagos (5000) GET | LISTAR PAGOS
+GET http://localhost:5000/api/v1/pagos/registro
+Content-Type: application/json
+
+### CONEXION ms-compras (5000) POST | REGISTRAR COMPRA
+POST http://localhost:5000/api/compras/
+Content-Type: application/json
+
+{
+  "producto_id": "1",
+  "cantidad": 1,
+  "direccion_envio": "Calle 123123"
+}
+
+### CONEXION ms-inventario (5000) POST | REGISTRAR TRANSACCION
+POST http://localhost:5000/api/inventario/
+Content-Type: application/json
+
+{
+  "producto_id": 1,
+  "cantidad": 131,
+  "entrada_salida": 1
+}
+
+### CONEXION ms-inventario (5000) GET | OBTENER STOCK
+GET http://localhost:5000/api/inventario/1
+Content-Type: application/json
+
+### CONEXION main-commerce (5000) POST | REGISTRAR COMPRA
+POST http://localhost:5000/api/compra/
+Content-Type: application/json
+
+{
+  "producto_id": 1,
+  "cantidad": 1,
+  "direccion_envio": "Calle 123",
+  "metodo": "tarjeta"
+}
+
+
+
+
+
+
+
+
+
+
+### PRUEBA ms-catalogo (5001) POST | REGISTRAR PRODUCTO
+POST http://localhost:5001/api/catalogo/
+Content-Type: application/json
+
+{
+  "nombre": "celular",
+  "precio": 100.50,
+  "activo": true
+}
+
+### PRUEBA ms-catalogo (5001) GET | OBTENER PRODUCTO
+GET http://localhost:5001/api/catalogo/1
+Content-Type: application/json
+
+### PRUEBA ms-compras (5002) POST | REGISTRAR COMPRA
+POST http://localhost:5002/api/compras/
+Content-Type: application/json
+
+{
+  "producto_id": "1",
+  "cantidad": 1,
+  "direccion_envio": "Calle 123123"
+}
+
+### PRUEBA ms-pagos (5004) POST | REGISTRAR PAGO
+POST http://localhost:5004/api/v1/pagos/registro
+Content-Type: application/json
+
+{
+  "monto": 100.50,
+  "metodo": "tarjeta",
+  "descripcion": "pedido123"
+}
+
+### PRUEBA ms-pagos (5004) GET | LISTAR PAGOS
+GET http://localhost:5004/api/v1/pagos/registro
+Content-Type: application/json
+
+### PRUEBA ms-inventario (5004) POST |  REGISTRAR TRANSACCION
+POST http://localhost:5003/api/inventario/
+Content-Type: application/json
+
+{
+  "producto_id": 1,
+  "cantidad": 300,
+  "entrada_salida": 1
+}
+
+### PRUEBA ms-inventario (5004) GET | OBTENER STOCK
+GET http://localhost:5003/api/inventario/1
+Content-Type: application/json
